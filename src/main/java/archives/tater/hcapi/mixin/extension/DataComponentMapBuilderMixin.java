@@ -17,22 +17,19 @@
 package archives.tater.hcapi.mixin.extension;
 
 import archives.tater.hcapi.api.HcapiDataComponentMapBuilder;
+import archives.tater.hcapi.mixin.DataComponentPatchAccessor;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.TypedDataComponent;
+import net.minecraft.core.component.*;
 
 import it.unimi.dsi.fastutil.objects.Reference2ObjectMap;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Mixin(DataComponentMap.Builder.class)
 public abstract class DataComponentMapBuilderMixin implements HcapiDataComponentMapBuilder {
@@ -48,11 +45,8 @@ public abstract class DataComponentMapBuilderMixin implements HcapiDataComponent
 
 	@Override
 	public DataComponentMap.Builder apply(DataComponentPatch patch) {
-		for (Map.Entry<DataComponentType<?>, Optional<?>> entry : patch.entrySet()) {
-			entry.getValue().ifPresentOrElse(
-					value -> this.setUnchecked(entry.getKey(), value),
-					() -> this.set(entry.getKey(), null)
-			);
+		for (Map.Entry<DataComponentType<?>, ?> entry : ((DataComponentPatchAccessor) (Object) patch).getMap().entrySet()) {
+			this.setUnchecked(entry.getKey(), Removed.removedToNull(entry.getValue()));
 		}
 
 		return (DataComponentMap.Builder) (Object) this;
