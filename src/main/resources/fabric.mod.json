@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "hcapi",
+	"version": "${version}",
+	"name": "hcapi",
+	"description": "Allows conveniently attaching data to holders via datapack",
+	"authors": [
+		"CallMeEchoCodes",
+		"EightSidedSquare",
+		"ThePotatoArchivist"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/hcapi/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"archives.tater.hcapi.impl.HolderComponentEntrypoint"
+		],
+		"client": [
+			"archives.tater.hcapi.client.impl.HolderComponentClientEntrypoint"
+		]
+	},
+	"mixins": [
+		"hcapi.mixins.json",
+		{
+			"config": "hcapi.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"accessWidener": "hcapi.classtweaker",
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
