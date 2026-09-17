@@ -91,7 +91,7 @@ public class HcapiDataComponentInitializersImpl {
 
 	private static class PhaseData extends SortableNode<PhaseData> {
 		final Identifier id;
-		HcapiDataComponentInitializer initializer;
+		final @Nullable HcapiDataComponentInitializer initializer;
 
 		PhaseData(Identifier id, @Nullable HcapiDataComponentInitializer initializer) {
 			super();

@@ -163,7 +163,7 @@ public final class DataHolderComponentBuilderImpl implements DataHolderComponent
 					.encode(input.components.build(), ops, ops.mapBuilder());
 
 			for (Map.Entry<Identifier, Optional<Tag>> entry : input.forcedComponents.entrySet()) {
-				String key = entry.getValue().isPresent() ? entry.getKey().toString() : "!" + entry.getKey().toString();
+				String key = entry.getValue().isPresent() ? entry.getKey().toString() : "!" + entry.getKey();
 				DataResult<T> value = entry.getValue()
 						.map(tag -> ExtraCodecs.NBT.encodeStart(ops, tag))
 						.orElseGet(() -> ops.mergeToMap(ops.empty(), MapLike.empty()));
