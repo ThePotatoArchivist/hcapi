@@ -16,13 +16,14 @@
 
 package archives.tater.hcapi.impl.sync;
 
+import archives.tater.hcapi.impl.Hcapi;
+
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.context.PacketContext;
 
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 
 import io.netty.buffer.ByteBuf;
@@ -34,7 +35,7 @@ public record ClientboundUpdateComponentsPayload(
 		// Each byte array encodes a registry ResourceKey and a Map<Holder, DataComponentMap>
 		List<byte[]> registryToComponents
 ) implements CustomPacketPayload {
-	public static final Type<ClientboundUpdateComponentsPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath("fabric", "update_holder_components"));
+	public static final Type<ClientboundUpdateComponentsPayload> TYPE = new Type<>(Hcapi.id("update_holder_components"));
 	public static final StreamCodec<ByteBuf, ClientboundUpdateComponentsPayload> STREAM_CODEC = ByteBufCodecs.BYTE_ARRAY
 			.apply(ByteBufCodecs.list())
 			.map(ClientboundUpdateComponentsPayload::new, ClientboundUpdateComponentsPayload::registryToComponents);

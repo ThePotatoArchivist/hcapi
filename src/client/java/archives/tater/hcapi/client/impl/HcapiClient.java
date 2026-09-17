@@ -31,16 +31,16 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class HolderComponentClientEntrypoint implements ClientModInitializer {
+public class HcapiClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ClientConfigurationNetworking.registerGlobalReceiver(
 				ClientboundUpdateComponentsPayload.TYPE,
 				(payload, context) -> {
 					RegistryDataCollector collector = ((ClientConfigurationPacketListenerImplAccessor) context.packetListener()).getRegistryDataCollector();
-					FabricRegistryDataCollector fabricCollector = ((FabricRegistryDataCollector) collector);
+					HcapiRegistryDataCollector hcapiCollector = ((HcapiRegistryDataCollector) collector);
 
-					fabricCollector.fabric$appendComponents(payload);
+					hcapiCollector.hcapi$appendComponents(payload);
 				}
 		);
 

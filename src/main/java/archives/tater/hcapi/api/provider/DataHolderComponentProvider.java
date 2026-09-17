@@ -16,6 +16,7 @@
 
 package archives.tater.hcapi.api.provider;
 
+import archives.tater.hcapi.impl.Hcapi;
 import archives.tater.hcapi.impl.datagen.DataHolderComponentBuilderImpl;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -53,7 +54,7 @@ public abstract class DataHolderComponentProvider implements DataProvider {
 
 	public DataHolderComponentProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		this.output = output;
-		this.pathProvider = this.output.createPathProvider(PackOutput.Target.DATA_PACK, "fabric/components/");
+		this.pathProvider = this.output.createPathProvider(PackOutput.Target.DATA_PACK, Hcapi.MOD_ID + "/components/");
 		this.registriesFuture = registriesFuture;
 	}
 

@@ -16,7 +16,7 @@
 
 package archives.tater.hcapi.mixin.extension;
 
-import archives.tater.hcapi.api.FabricDataComponentMapBuilder;
+import archives.tater.hcapi.api.HcapiDataComponentMapBuilder;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Mixin(DataComponentMap.Builder.class)
-public abstract class DataComponentMapBuilderMixin implements FabricDataComponentMapBuilder {
+public abstract class DataComponentMapBuilderMixin implements HcapiDataComponentMapBuilder {
 	@Shadow
 	public abstract <T> DataComponentMap.Builder set(DataComponentType<T> type, @Nullable T value);
 

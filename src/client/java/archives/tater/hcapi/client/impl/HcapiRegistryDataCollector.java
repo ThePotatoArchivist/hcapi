@@ -19,8 +19,8 @@ package archives.tater.hcapi.client.impl;
 
 import archives.tater.hcapi.impl.sync.ClientboundUpdateComponentsPayload;
 
-public interface FabricRegistryDataCollector {
-	default void fabric$appendComponents(ClientboundUpdateComponentsPayload payload) {
+public interface HcapiRegistryDataCollector {
+	default void hcapi$appendComponents(ClientboundUpdateComponentsPayload payload) {
 		throw new IllegalStateException("Implemented via mixin.");
 	}
 }

@@ -1,6 +1,6 @@
 package archives.tater.hcapi.test;
 
-import archives.tater.hcapi.api.FabricDataComponentInitializers;
+import archives.tater.hcapi.api.HcapiDataComponentInitializers;
 
 import net.fabricmc.api.ModInitializer;
 
@@ -18,7 +18,7 @@ public class HcapiTestmod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        FabricDataComponentInitializers.registerInitializer(id("test"), context -> {
+        HcapiDataComponentInitializers.registerInitializer(id("test"), context -> {
             context.builder(Items.DIRT.builtInRegistryHolder().key())
                     .set(DataComponents.RARITY, Rarity.RARE);
         });

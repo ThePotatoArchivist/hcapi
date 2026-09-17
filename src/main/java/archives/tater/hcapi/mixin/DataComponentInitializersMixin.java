@@ -16,9 +16,9 @@
 
 package archives.tater.hcapi.mixin;
 
-import archives.tater.hcapi.api.FabricDataComponentInitializer;
-import archives.tater.hcapi.impl.FabricDataComponentInitContextImpl;
-import archives.tater.hcapi.impl.FabricDataComponentInitializersImpl;
+import archives.tater.hcapi.api.HcapiDataComponentInitializer;
+import archives.tater.hcapi.impl.HcapiDataComponentInitContextImpl;
+import archives.tater.hcapi.impl.HcapiDataComponentInitializersImpl;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -36,11 +36,11 @@ import java.util.Map;
 @Mixin(DataComponentInitializers.class)
 public class DataComponentInitializersMixin {
 	@ModifyReturnValue(method = "runInitializers", at = @At("RETURN"))
-	private Map<ResourceKey<?>, DataComponentMap.Builder> runFabricInitializers(
+	private Map<ResourceKey<?>, DataComponentMap.Builder> runHcapiInitializers(
 			Map<ResourceKey<?>, DataComponentMap.Builder> original,
 			@Local(argsOnly = true) HolderLookup.Provider holders
 	) {
-		if (!FabricDataComponentInitializersImpl.RESOURCE_MANAGER.isBound()) {
+		if (!HcapiDataComponentInitializersImpl.RESOURCE_MANAGER.isBound()) {
 			// I would like to include a warning here if another mod calls this method, but we do expect vanilla to call it-
 			// with this unbound in RegistryDataCollector. I could probably stackwalk but that seems like a lot of effort.
 
@@ -48,15 +48,15 @@ public class DataComponentInitializersMixin {
 			return original;
 		}
 
-		ResourceManager resourceManager = FabricDataComponentInitializersImpl.RESOURCE_MANAGER.get();
+		ResourceManager resourceManager = HcapiDataComponentInitializersImpl.RESOURCE_MANAGER.get();
 
-		FabricDataComponentInitializer.Context context = new FabricDataComponentInitContextImpl(
+		HcapiDataComponentInitializer.Context context = new HcapiDataComponentInitContextImpl(
 				holders,
 				resourceManager,
 				original
 		);
 
-		for (FabricDataComponentInitializer initializer : FabricDataComponentInitializersImpl.sort()) {
+		for (HcapiDataComponentInitializer initializer : HcapiDataComponentInitializersImpl.sort()) {
 			initializer.run(context);
 		}
 

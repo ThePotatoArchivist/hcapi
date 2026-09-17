@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package archives.tater.hcapi.impl;
-
-
-import archives.tater.hcapi.api.FabricDataComponentInitializer;
+package archives.tater.hcapi.api;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 
-import java.util.Map;
+/// Extended version of [net.minecraft.core.component.DataComponentInitializers.Initializer] that allows adding components to arbitrary holders instead of having to define what holders are to be given components at registration.
+@FunctionalInterface
+public interface HcapiDataComponentInitializer {
+	void run(Context context);
 
-public record FabricDataComponentInitContextImpl(
-		HolderLookup.Provider lookupProvider,
-		ResourceManager resourceManager,
-		Map<ResourceKey<?>, DataComponentMap.Builder> builders
-) implements FabricDataComponentInitializer.Context {
-	@Override
-	public DataComponentMap.Builder builder(ResourceKey<?> key) {
-		return builders.computeIfAbsent(key, _ -> DataComponentMap.builder());
+	interface Context {
+		HolderLookup.Provider lookupProvider();
+		ResourceManager resourceManager();
+
+		DataComponentMap.Builder builder(ResourceKey<?> key);
 	}
 }

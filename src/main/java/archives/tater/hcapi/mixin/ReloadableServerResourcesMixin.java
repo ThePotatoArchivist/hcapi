@@ -16,7 +16,7 @@
 
 package archives.tater.hcapi.mixin;
 
-import archives.tater.hcapi.impl.FabricDataComponentInitializersImpl;
+import archives.tater.hcapi.impl.HcapiDataComponentInitializersImpl;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -41,7 +41,7 @@ public class ReloadableServerResourcesMixin {
 			@Local(argsOnly = true) ResourceManager resourceManager
 	) {
 		Supplier<?> wrappedSupplier = () -> ScopedValue.where(
-				FabricDataComponentInitializersImpl.RESOURCE_MANAGER,
+				HcapiDataComponentInitializersImpl.RESOURCE_MANAGER,
 				resourceManager
 		).call(supplier::get);
 

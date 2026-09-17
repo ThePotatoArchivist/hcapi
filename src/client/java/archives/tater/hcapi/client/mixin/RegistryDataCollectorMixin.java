@@ -16,7 +16,7 @@
 
 package archives.tater.hcapi.client.mixin;
 
-import archives.tater.hcapi.client.impl.FabricRegistryDataCollector;
+import archives.tater.hcapi.client.impl.HcapiRegistryDataCollector;
 import archives.tater.hcapi.impl.sync.ClientboundUpdateComponentsPayload;
 import archives.tater.hcapi.impl.sync.HolderComponentSynchronization;
 
@@ -37,12 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(RegistryDataCollector.class)
-public class RegistryDataCollectorMixin implements FabricRegistryDataCollector {
+public class RegistryDataCollectorMixin implements HcapiRegistryDataCollector {
 	@Unique
 	private ClientboundUpdateComponentsPayload components = new ClientboundUpdateComponentsPayload(new ArrayList<>());
 
 	@Override
-	public void fabric$appendComponents(ClientboundUpdateComponentsPayload payload) {
+	public void hcapi$appendComponents(ClientboundUpdateComponentsPayload payload) {
 		components = payload;
 	}
 

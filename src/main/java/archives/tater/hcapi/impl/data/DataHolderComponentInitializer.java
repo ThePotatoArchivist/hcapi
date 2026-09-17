@@ -17,7 +17,8 @@
 package archives.tater.hcapi.impl.data;
 
 
-import archives.tater.hcapi.api.FabricDataComponentInitializer;
+import archives.tater.hcapi.api.HcapiDataComponentInitializer;
+import archives.tater.hcapi.impl.Hcapi;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.JsonOps;
@@ -39,7 +40,7 @@ import java.io.Reader;
 import java.util.List;
 import java.util.Map;
 
-public class DataHolderComponentInitializer implements FabricDataComponentInitializer {
+public class DataHolderComponentInitializer implements HcapiDataComponentInitializer {
 	private static final Logger LOGGER = LogUtils.getLogger();
 
 	@Override
@@ -55,7 +56,7 @@ public class DataHolderComponentInitializer implements FabricDataComponentInitia
 			ResourceKey<? extends Registry<? extends T>> key
 	) {
 		HolderLookup.RegistryLookup<T> lookup = context.lookupProvider().lookupOrThrow(key);
-		FileToIdConverter lister = FileToIdConverter.json("fabric/" + Registries.componentsDirPath(lookup.key()));
+		FileToIdConverter lister = FileToIdConverter.json(Hcapi.MOD_ID + "/" + Registries.componentsDirPath(lookup.key()));
 
 		for (Map.Entry<Identifier, List<Resource>> entry : lister.listMatchingResourceStacks(context.resourceManager()).entrySet()) {
 			Identifier location = entry.getKey();

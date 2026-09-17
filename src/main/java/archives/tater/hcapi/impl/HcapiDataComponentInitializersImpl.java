@@ -16,7 +16,7 @@
 
 package archives.tater.hcapi.impl;
 
-import archives.tater.hcapi.api.FabricDataComponentInitializer;
+import archives.tater.hcapi.api.HcapiDataComponentInitializer;
 
 import net.fabricmc.fabric.impl.base.toposort.NodeSorting;
 import net.fabricmc.fabric.impl.base.toposort.SortableNode;
@@ -28,12 +28,12 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.*;
 
-public class FabricDataComponentInitializersImpl {
+public class HcapiDataComponentInitializersImpl {
 	private static final Map<Identifier, PhaseData> initializers = new LinkedHashMap<>();
-	private static final List<FabricDataComponentInitializer> sorted = new ArrayList<>();
+	private static final List<HcapiDataComponentInitializer> sorted = new ArrayList<>();
 	private static boolean dirty = false;
 
-	public static void registerInitializer(Identifier id, FabricDataComponentInitializer initializer) {
+	public static void registerInitializer(Identifier id, HcapiDataComponentInitializer initializer) {
 		Objects.requireNonNull(id, "The initializer identifier should not be null.");
 		Objects.requireNonNull(initializer, "The initializer should not be null.");
 
@@ -73,7 +73,7 @@ public class FabricDataComponentInitializersImpl {
 		dirty = true;
 	}
 
-	public static List<FabricDataComponentInitializer> sort() {
+	public static List<HcapiDataComponentInitializer> sort() {
 		if (dirty) {
 			dirty = false;
 			ArrayList<PhaseData> phases = new ArrayList<>(initializers.values());
@@ -91,9 +91,9 @@ public class FabricDataComponentInitializersImpl {
 
 	private static class PhaseData extends SortableNode<PhaseData> {
 		final Identifier id;
-		FabricDataComponentInitializer initializer;
+		HcapiDataComponentInitializer initializer;
 
-		PhaseData(Identifier id, @Nullable FabricDataComponentInitializer initializer) {
+		PhaseData(Identifier id, @Nullable HcapiDataComponentInitializer initializer) {
 			super();
 			this.id = id;
 			this.initializer = initializer;

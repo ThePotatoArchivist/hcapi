@@ -16,20 +16,14 @@
 
 package archives.tater.hcapi.api;
 
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentHolder;
 import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.packs.resources.ResourceManager;
 
-/// Extended version of [net.minecraft.core.component.DataComponentInitializers.Initializer] that allows adding components to arbitrary holders instead of having to define what holders are to be given components at registration.
-@FunctionalInterface
-public interface FabricDataComponentInitializer {
-	void run(Context context);
-
-	interface Context {
-		HolderLookup.Provider lookupProvider();
-		ResourceManager resourceManager();
-
-		DataComponentMap.Builder builder(ResourceKey<?> key);
+/// This interface is injected into several vanilla classes via mixin. Do not implement it yourself, implement [DataComponentHolder] instead.
+/// @see DataComponentHolder
+public interface HcapiDataComponentHolder extends DataComponentHolder {
+	@Override
+	default DataComponentMap getComponents() {
+		throw new UnsupportedOperationException("Implemented via mixin.");
 	}
 }

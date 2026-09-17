@@ -16,7 +16,8 @@
 
 package archives.tater.hcapi.api;
 
-import archives.tater.hcapi.impl.FabricDataComponentInitializersImpl;
+import archives.tater.hcapi.impl.HcapiDataComponentInitializersImpl;
+import archives.tater.hcapi.impl.Hcapi;
 
 import net.minecraft.resources.Identifier;
 
@@ -24,20 +25,20 @@ import net.minecraft.resources.Identifier;
 ///
 /// [Data Component Initializers][net.minecraft.core.component.DataComponentInitializers.Initializer] are used to add components to [Holders][net.minecraft.core.Holder]. They are run right before the end of a resource reload.
 /// @see net.minecraft.core.component.DataComponentInitializers DataComponentInitializers
-/// @see FabricDataComponentInitializer
+/// @see HcapiDataComponentInitializer
 // TODO: Finish docs
-public final class FabricDataComponentInitializers {
-	/// @see FabricDataComponentInitializers#addInitializerOrdering(Identifier, Identifier)
-	public static final Identifier DATA_HOLDER_COMPONENTS = Identifier.fromNamespaceAndPath("fabric", "data_holder_components");
+public final class HcapiDataComponentInitializers {
+	/// @see HcapiDataComponentInitializers#addInitializerOrdering(Identifier, Identifier)
+	public static final Identifier DATA_HOLDER_COMPONENTS = Hcapi.id("data_holder_components");
 
-	private FabricDataComponentInitializers() {
+	private HcapiDataComponentInitializers() {
 	}
 
-	public static void registerInitializer(Identifier id, FabricDataComponentInitializer initializer) {
-		FabricDataComponentInitializersImpl.registerInitializer(id, initializer);
+	public static void registerInitializer(Identifier id, HcapiDataComponentInitializer initializer) {
+		HcapiDataComponentInitializersImpl.registerInitializer(id, initializer);
 	}
 
 	public static void addInitializerOrdering(Identifier first, Identifier second) {
-		FabricDataComponentInitializersImpl.addInitializerOrdering(first, second);
+		HcapiDataComponentInitializersImpl.addInitializerOrdering(first, second);
 	}
 }

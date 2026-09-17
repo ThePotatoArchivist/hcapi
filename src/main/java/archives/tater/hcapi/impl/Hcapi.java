@@ -16,22 +16,28 @@
 
 package archives.tater.hcapi.impl;
 
-import archives.tater.hcapi.api.FabricDataComponentInitializers;
+import archives.tater.hcapi.api.HcapiDataComponentInitializers;
 import archives.tater.hcapi.impl.data.DataHolderComponentInitializer;
 import archives.tater.hcapi.impl.sync.ClientboundUpdateComponentsPayload;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 
-public class HolderComponentEntrypoint implements ModInitializer {
+import net.minecraft.resources.Identifier;
+
+public class Hcapi implements ModInitializer {
 	// TODO: This size is enormous, I copied it straight out of FabricRegistryInit. This should be smaller but I don't know how to choose a good value.
-	private static final int MAX_PACKET_SIZE = Integer.getInteger("fabric.holder.component.sync.max_packet_size", 128 * 1024 * 1024);
-	public static final String MOD_ID = "fabric-holder-component-api-v1";
+	private static final int MAX_PACKET_SIZE = Integer.getInteger("hcapi.sync.max_packet_size", 128 * 1024 * 1024);
+	public static final String MOD_ID = "hcapi";
+
+	public static Identifier id(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
+	}
 
 	@Override
 	public void onInitialize() {
-		FabricDataComponentInitializers.registerInitializer(
-				FabricDataComponentInitializers.DATA_HOLDER_COMPONENTS,
+		HcapiDataComponentInitializers.registerInitializer(
+				HcapiDataComponentInitializers.DATA_HOLDER_COMPONENTS,
 				new DataHolderComponentInitializer()
 		);
 

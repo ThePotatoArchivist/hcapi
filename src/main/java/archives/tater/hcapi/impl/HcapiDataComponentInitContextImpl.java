@@ -14,16 +14,25 @@
  * limitations under the License.
  */
 
-package archives.tater.hcapi.api;
+package archives.tater.hcapi.impl;
 
-import net.minecraft.core.component.DataComponentHolder;
+
+import archives.tater.hcapi.api.HcapiDataComponentInitializer;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.packs.resources.ResourceManager;
 
-/// This interface is injected into several vanilla classes via mixin. Do not implement it yourself, implement [DataComponentHolder] instead.
-/// @see DataComponentHolder
-public interface FabricDataComponentHolder extends DataComponentHolder {
+import java.util.Map;
+
+public record HcapiDataComponentInitContextImpl(
+		HolderLookup.Provider lookupProvider,
+		ResourceManager resourceManager,
+		Map<ResourceKey<?>, DataComponentMap.Builder> builders
+) implements HcapiDataComponentInitializer.Context {
 	@Override
-	default DataComponentMap getComponents() {
-		throw new UnsupportedOperationException("Implemented via mixin.");
+	public DataComponentMap.Builder builder(ResourceKey<?> key) {
+		return builders.computeIfAbsent(key, _ -> DataComponentMap.builder());
 	}
 }
