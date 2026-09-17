@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"archives.tater.hcapi.test.HcapiTestmod"
+		],
+		"fabric-datagen": [
+			"archives.tater.hcapi.test.HcapiTestmodDataGenerator"
 		]
 	},
 	"depends": {
