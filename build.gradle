@@ -13,6 +13,46 @@ repositories {
 
 loom {
 	splitEnvironmentSourceSets()
+}
+
+
+
+sourceSets {
+	create("testmod") {
+		compileClasspath += main.output + main.compileClasspath + client.output + client.compileClasspath
+		runtimeClasspath += main.output + main.runtimeClasspath + client.output + client.runtimeClasspath
+		resources {
+			srcDir "src/testmod/generated"
+		}
+	}
+}
+
+loom {
+	runs {
+		var testmod = sourceSets["testmod"]
+
+		"testmodClient" {
+			client()
+			name = "Testmod Client"
+			source(testmod)
+		}
+
+		"testmodServer"  {
+			server()
+			name = "Testmod Server"
+			source(testmod)
+		}
+
+		"testmodDatagen" {
+			client()
+			name = "Testmod Data Generation"
+			vmArg("-Dfabric-api.datagen")
+			vmArg("-Dfabric-api.datagen.output-dir=${file("src/testmod/generated")}")
+			vmArg("-Dfabric-api.datagen.modid=hcapitest")
+			runDir("build/datagen")
+			source(testmod)
+		}
+	}
 
 	mods {
 		"hcapi" {

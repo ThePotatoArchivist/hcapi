@@ -1,0 +1,29 @@
+{
+	"schemaVersion": 1,
+	"id": "hcapitest",
+	"version": "${version}",
+	"name": "hcapi test",
+	"description": "Test mod for hcapi",
+	"authors": [
+		"ThePotatoArchivist"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/hcapi/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"archives.tater.hcapi.test.HcapiTestmod"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*",
+		"hcapi": "*"
+	}
+}
