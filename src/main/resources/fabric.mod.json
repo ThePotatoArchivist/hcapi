@@ -5,12 +5,14 @@
 	"name": "hcapi",
 	"description": "Allows conveniently attaching data to holders via datapack",
 	"authors": [
-		"CallMeEchoCodes",
-		"EightSidedSquare",
 		"ThePotatoArchivist"
 	],
+    "contributors": [
+		"CallMeEchoCodes",
+		"EightSidedSquare"
+    ],
 	"contact": {
-		"homepage": "https://github.com/ThePotatoArchivist/hcapi",
+		"homepage": "https://modrinth.com/mod/hcapi",
 		"sources": "https://github.com/ThePotatoArchivist/hcapi"
 	},
 	"license": "Apache-2.0",
@@ -34,8 +36,13 @@
 	"accessWidener": "hcapi.classtweaker",
 	"depends": {
 		"fabricloader": ">=0.19.5",
-		"minecraft": "~26.1.2",
+		"minecraft": ">=26.1 <26.3",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"badges": ["library"]
+		}
 	}
 }
