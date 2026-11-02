@@ -14,14 +14,7 @@
  * limitations under the License.
  */
 
-/**
- * API code for fabric-holder-component-api-v1.
- *
- * <p><b>Experimental feature</b>, may be removed or changed without further notice.
- */
 @NullMarked
-@ApiStatus.Experimental
 package archives.tater.hcapi.api;
 
-import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.NullMarked;
